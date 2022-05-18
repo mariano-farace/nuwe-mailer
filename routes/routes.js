@@ -38,7 +38,9 @@ router.post("/send-email", (req, res) => {
 
   async function sendMail() {
     try {
+      //TODO revisar esto que no esta siendo usado
       const accessToken = await oauth2Client.getAccessToken();
+      console.log("[1;35m Purple accessToken", accessToken);
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -48,7 +50,7 @@ router.post("/send-email", (req, res) => {
           clientId: CLIENT_ID,
           clientSecret: CLIENT_SECRET,
           refreshToken: REFRESH_TOKEN,
-          accessToken: oauth2Client.credentials.access_token,
+          accessToken: accessToken,
         },
       });
 
