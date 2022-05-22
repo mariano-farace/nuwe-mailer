@@ -35,7 +35,7 @@ const mainFunction = async (req, res) => {
   const mailOptions = {
     //TODO esto hardcoded tengo que cambiarlo por opciones!!
     from: "hola eso deberia andar",
-    to: "mariano_farace@hotmail.com",
+    to: recipientEmail,
     subject: subject,
     html: htmlContent,
   };
