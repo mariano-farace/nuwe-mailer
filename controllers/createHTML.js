@@ -1,11 +1,6 @@
-const createHTML = (name, email, message, phone) => {
+const createHTML = (recipientName, emitterName, message) => {
   const htmlContent = `
-<h1>Formulario de nodemailer</h1>
-<ul>
-  <li>Nombre: ${name}</li>
-  <li>Email: ${email}</li>
-  <li>Teléfono: ${phone}</li>
-</ul>
+<h1>Hi ${recipientName}, ${emitterName} has sent you this message:</h1>
 <p>${message}</p>
 `;
   return htmlContent;
