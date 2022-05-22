@@ -1,4 +1,5 @@
 const express = require("express");
+console.log("antes de require nodemailer");
 const nodemailer = require("nodemailer");
 const { oauth2Client } = require("../controllers/OAuth");
 const {
@@ -14,17 +15,28 @@ const createHTML = require("../controllers/createHTML");
 //TODO darle publish app en la consola de google. Poner un logo
 
 const mainFunction = async (req, res) => {
-  const { name, email, message, phone } = req.body;
+  console.log("entra a main function");
+
+  const {
+    emitterName,
+    emitterEmail,
+    recipientName,
+    recipientEmail,
+    subject,
+    message,
+  } = req.body;
   //TODO controlar que hacer con la form esta si esta vacia
 
-  const htmlContent = createHTML(name, email, message, phone);
+  console.log("recipientEmail:", recipientEmail);
+
+  const htmlContent = createHTML(recipientName, emitterName, message);
   //TODO corregir el "from" que se envia vacio
 
   const mailOptions = {
     //TODO esto hardcoded tengo que cambiarlo por opciones!!
-    from: "Prueba de nodemailer",
-    to: email,
-    subject: "Prueba de nodemailer",
+    from: "hola eso deberia andar",
+    to: "mariano_farace@hotmail.com",
+    subject: subject,
     html: htmlContent,
   };
 
@@ -39,7 +51,7 @@ const mainFunction = async (req, res) => {
     //TODO deberia cambiar esto para que si el acces token esta expirado, solicite uno nuevo
     //TODO revisar esto que no esta siendo usado
     const accessToken = await oauth2Client.getAccessToken();
-
+    console.log("LLega a 1");
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -69,6 +81,7 @@ const mainFunction = async (req, res) => {
     console.log(result);
     res.status(200).send("sent");
   } catch (err) {
+    console.log("entra al error directamente");
     console.log(err);
   }
 };
