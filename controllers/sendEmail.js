@@ -1,7 +1,6 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-const router = express.Router();
+const { oauth2Client } = require("../controllers/OAuth");
 const {
   CLIENT_ID, //No issue
   CLIENT_SECRET, //No issue
@@ -14,7 +13,7 @@ const {
 //TODO less secure app va a dejar de funcionar pronto!
 //TODO darle publish app en la consola de google. Poner un logo
 
-router.post("/send-email", (req, res) => {
+const mainFunction = (req, res) => {
   const { name, email, message, phone } = req.body;
   const htmlContent = `
   <h1>Formulario de nodemailer</h1>
@@ -26,15 +25,7 @@ router.post("/send-email", (req, res) => {
   <p>${message}</p>
 `;
 
-  const oauth2Client = new google.auth.OAuth2(
-    CLIENT_ID,
-    CLIENT_SECRET,
-    REDIRECT_URI
-  );
-
-  oauth2Client.setCredentials({
-    refresh_token: REFRESH_TOKEN,
-  });
+  //TODO corregir el "from" que se envia vacio
 
   async function sendMail() {
     try {
@@ -61,7 +52,19 @@ router.post("/send-email", (req, res) => {
         html: htmlContent,
       };
 
-      const result = await transporter.sendMail(mailOptions); // darle .then!
+      const result = await transporter.sendMail(mailOptions); // darle ponele callback otry catch!
+      // transport.sendMail(mailOptions,function(err,result){
+      //   if(err){
+      //   res.send({
+      //   message:err
+      //   })
+      //   }else{
+      //   transport.close();
+      //   res.send({
+      //   message:'Email has been sent: check your inbox!'
+      //   })
+      //   }
+
       return result;
     } catch (err) {
       console.log(err);
@@ -76,5 +79,6 @@ router.post("/send-email", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-});
-module.exports = router;
+};
+
+module.exports = { mainFunction };
