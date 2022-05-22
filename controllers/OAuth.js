@@ -9,8 +9,11 @@ const {
   USER_MAIL,
 } = require("../config");
 
-const OAuth2 = google.auth.OAuth2;
-const oauth2Client = OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+const oauth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+);
 
 oauth2Client.setCredentials({
   refresh_token: REFRESH_TOKEN,
