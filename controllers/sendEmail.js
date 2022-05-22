@@ -34,7 +34,11 @@ const mainFunction = async (req, res) => {
 
   const mailOptions = {
     //TODO esto hardcoded tengo que cambiarlo por opciones!!
-    from: "hola eso deberia andar",
+    //As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
+    from: {
+      name: emitterName,
+      address: emitterEmail,
+    },
     to: recipientEmail,
     subject: subject,
     html: htmlContent,
