@@ -4,10 +4,10 @@ const { oauth2Client } = require("../controllers/OAuth");
 const {
   CLIENT_ID, //No issue
   CLIENT_SECRET, //No issue
-  REDIRECT_URI,
   REFRESH_TOKEN,
   USER_MAIL,
 } = require("../config");
+const createHTML = require("../controllers/createHTML");
 
 //TODO hacer que el refresh token se pida solo???
 //TODO less secure app va a dejar de funcionar pronto!
@@ -15,16 +15,8 @@ const {
 
 const mainFunction = (req, res) => {
   const { name, email, message, phone } = req.body;
-  const htmlContent = `
-  <h1>Formulario de nodemailer</h1>
-  <ul>
-    <li>Nombre: ${name}</li>
-    <li>Email: ${email}</li>
-    <li>Teléfono: ${phone}</li>
-  </ul>
-  <p>${message}</p>
-`;
 
+  const htmlContent = createHTML(name, email, message, phone);
   //TODO corregir el "from" que se envia vacio
 
   async function sendMail() {
@@ -37,6 +29,7 @@ const mainFunction = (req, res) => {
         service: "gmail",
         auth: {
           type: "OAuth2",
+          //TODO esto hardcoded tengo que cambiarlo por en ENV
           user: "carlitosgardel222@gmail.com",
           clientId: CLIENT_ID,
           clientSecret: CLIENT_SECRET,
@@ -46,6 +39,7 @@ const mainFunction = (req, res) => {
       });
 
       const mailOptions = {
+        //TODO esto hardcoded tengo que cambiarlo por opciones!!
         from: "Prueba de nodemailer",
         to: "mariano_farace@hotmail.com",
         subject: "Prueba de nodemailer",
