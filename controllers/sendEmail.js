@@ -19,11 +19,18 @@ const mainFunction = (req, res) => {
   const htmlContent = createHTML(name, email, message, phone);
   //TODO corregir el "from" que se envia vacio
 
-  async function sendMail() {
+  const mailOptions = {
+    //TODO esto hardcoded tengo que cambiarlo por opciones!!
+    from: "Prueba de nodemailer",
+    to: "mariano_farace@hotmail.com",
+    subject: "Prueba de nodemailer",
+    html: htmlContent,
+  };
+
+  async function sendMail(mailOptions) {
     try {
       //TODO revisar esto que no esta siendo usado
       const accessToken = await oauth2Client.getAccessToken();
-      console.log("[1;35m Purple accessToken", accessToken);
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -37,14 +44,6 @@ const mainFunction = (req, res) => {
           accessToken: accessToken,
         },
       });
-
-      const mailOptions = {
-        //TODO esto hardcoded tengo que cambiarlo por opciones!!
-        from: "Prueba de nodemailer",
-        to: "mariano_farace@hotmail.com",
-        subject: "Prueba de nodemailer",
-        html: htmlContent,
-      };
 
       const result = await transporter.sendMail(mailOptions); // darle ponele callback otry catch!
       // transport.sendMail(mailOptions,function(err,result){
@@ -65,7 +64,7 @@ const mainFunction = (req, res) => {
     }
   }
 
-  sendMail()
+  sendMail(mailOptions)
     .then((result) => {
       console.log(result);
       res.status(200).send("sent");
