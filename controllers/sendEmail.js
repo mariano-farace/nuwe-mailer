@@ -46,7 +46,7 @@ const sendPeerToPeerMail = async (req, res) => {
     // TODO deberia cambiar esto para que si el acces token esta expirado, solicite uno nuevo
     // TODO revisar esto que no esta siendo usado
 
-    const transporter = createNodeMailerTransporter();
+    const transporter = await createNodeMailerTransporter();
 
     const result = await transporter.sendMail(mailOptions); // darle ponele callback otry catch!
     // transport.sendMail(mailOptions,function(err,result){
