@@ -12,9 +12,9 @@ const {
   createNodeMailerTransporter,
 } = require("../controllers/nodeMailerTransporter");
 
-//TODO hacer que el refresh token se pida solo???
-//TODO less secure app va a dejar de funcionar pronto!
-//TODO darle publish app en la consola de google. Poner un logo
+// TODO hacer que el refresh token se pida solo???
+// TODO less secure app va a dejar de funcionar pronto!
+// TODO darle publish app en la consola de google. Poner un logo
 
 const sendPeerToPeerMail = async (req, res) => {
   const {
@@ -25,35 +25,35 @@ const sendPeerToPeerMail = async (req, res) => {
     subject,
     message,
   } = req.body;
-  //TODO controlar que hacer con la form esta si esta vacia
+  // TODO controlar que hacer con la form esta si esta vacia
 
   console.log("recipientEmail:", recipientEmail);
 
   const htmlContent = createHTML(recipientName, emitterName, message);
-  //TODO corregir el "from" que se envia vacio
+  // TODO corregir el "from" que se envia vacio
 
   const mailOptions = {
-    //TODO esto hardcoded tengo que cambiarlo por opciones!!
-    //As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
+    // TODO esto hardcoded tengo que cambiarlo por opciones!!
+    // As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
     from: {
       name: emitterName,
       address: emitterEmail,
     },
     to: recipientEmail,
-    subject: subject,
+    subject,
     html: htmlContent,
   };
 
-  //------------------
-  //------------------
-  //SEND MAIL
-  //------------------
-  //------------------
+  // ------------------
+  // ------------------
+  // SEND MAIL
+  // ------------------
+  // ------------------
 
   try {
     // El transporter lo tengo que crear cada vez que se manda un mail, para asegurarme de que el acces token no haya expirado
-    //TODO deberia cambiar esto para que si el acces token esta expirado, solicite uno nuevo
-    //TODO revisar esto que no esta siendo usado
+    // TODO deberia cambiar esto para que si el acces token esta expirado, solicite uno nuevo
+    // TODO revisar esto que no esta siendo usado
 
     const transporter = createNodeMailerTransporter();
 

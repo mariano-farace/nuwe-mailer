@@ -2,13 +2,13 @@ const express = require("express");
 const { google } = require("googleapis");
 const router = express.Router();
 const {
-  CLIENT_ID, //No issue
-  CLIENT_SECRET, //No issue
+  CLIENT_ID, // No issue
+  CLIENT_SECRET, // No issue
   REDIRECT_URI,
   REFRESH_TOKEN,
 } = require("../config");
 
-//TODO confirmar que esto no vaya a generar error cuando expire el regresh token despues de un dia! sino lo vas a tener que transformar en una funcion y que se pueda llamar cada vez que mandas un mail para crear oauth2Client
+// TODO confirmar que esto no vaya a generar error cuando expire el regresh token despues de un dia! sino lo vas a tener que transformar en una funcion y que se pueda llamar cada vez que mandas un mail para crear oauth2Client
 
 const oauth2Client = new google.auth.OAuth2(
   CLIENT_ID,
