@@ -1,6 +1,4 @@
-const express = require("express");
 console.log("antes de require nodemailer");
-const nodemailer = require("nodemailer");
 const {
   CLIENT_ID,
   CLIENT_SECRET,
