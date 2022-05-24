@@ -1,10 +1,3 @@
-console.log("antes de require nodemailer");
-const {
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REFRESH_TOKEN,
-  USER_MAIL,
-} = require("../config");
 const createHTML = require("../controllers/createHTML");
 const {
   createNodeMailerTransporter,
