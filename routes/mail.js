@@ -9,10 +9,10 @@ const {
   REFRESH_TOKEN,
   USER_MAIL,
 } = require("../config");
-const { mainFunction } = require("../controllers/sendEmail");
+const { sendPeerToPeerMail } = require("../controllers/sendEmail");
 
 //TODO hacer que el refresh token se pida solo???
 //TODO less secure app va a dejar de funcionar pronto!
 //TODO darle publish app en la consola de google. Poner un logo
-router.post("/send-email", mainFunction);
+router.post("/send-email", sendPeerToPeerMail);
 module.exports = router;
