@@ -1,6 +1,4 @@
-const express = require("express");
 const { google } = require("googleapis");
-const router = express.Router();
 const {
   CLIENT_ID, // No issue
   CLIENT_SECRET, // No issue
