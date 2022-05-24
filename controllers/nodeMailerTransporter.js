@@ -7,21 +7,19 @@ const {
 const nodemailer = require("nodemailer");
 const { oauth2Client } = require("../controllers/OAuth");
 
-
-createNodeMailerTransporter = () => {
-
+const createNodeMailerTransporter = async () => {
   const accessToken = await oauth2Client.getAccessToken();
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       type: "OAuth2",
-      //TODO esto hardcoded tengo que cambiarlo por en ENV
+      // TODO esto hardcoded tengo que cambiarlo por en ENV
       user: USER_MAIL,
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
-      accessToken: accessToken,
+      accessToken,
     },
   });
   return transporter;
