@@ -1,14 +1,5 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
 const router = express.Router();
-const {
-  CLIENT_ID, // No issue
-  CLIENT_SECRET, // No issue
-  REDIRECT_URI,
-  REFRESH_TOKEN,
-  USER_MAIL,
-} = require("../config");
 const { sendPeerToPeerMail } = require("../controllers/sendEmail");
 
 // TODO hacer que el refresh token se pida solo???
