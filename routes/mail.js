@@ -9,5 +9,5 @@ const {
 // TODO less secure app va a dejar de funcionar pronto!
 // TODO darle publish app en la consola de google. Poner un logo
 router.post("/send-email", sendPeerToPeerMail);
-router.post("/welcome", sendWelcomeMail);
+router.post("/register", sendWelcomeMail);
 module.exports = router;
