@@ -1,13 +1,10 @@
-const createBodyHTML = require("./createBodyHTML");
+const createBodyHTML = require("../utils/createBodyHTML");
 const {
   createNodeMailerTransporter,
-} = require("../controllers/nodeMailerTransporter");
-const { welcomeHTML } = require("../controllers/welcomeHTML");
+} = require("../utils/nodeMailerTransporter");
+const { welcomeHTML } = require("../utils/welcomeHTML");
 const path = require("path");
-const {
-  simpleMailSchema,
-  welComeSchema,
-} = require("../controllers/joiSchemas");
+const { simpleMailSchema, welComeSchema } = require("../utils/joiSchemas");
 
 const sendPeerToPeerMail = async (req, res) => {
   const {

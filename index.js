@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const mailRouter = require("./routes/mail");
+const mailRouter = require("./app/routes/mail");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // TODO less secure app va a dejar de funcionar pronto!
 // TODO darle publish app en la consola de google. Poner un logo
 // TODO testear los errores, por ejemplo el de cuando expira el token
+// TODO borrar todos los TODO
 
 app.listen(process.env.PORT || 3030, () => {
   console.log("Server started on port 3030"); // TODO poner el port bien aca
