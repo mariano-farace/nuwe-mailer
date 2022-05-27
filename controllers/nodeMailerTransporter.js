@@ -2,7 +2,7 @@ const {
   CLIENT_ID,
   CLIENT_SECRET,
   REFRESH_TOKEN,
-  USER_MAIL,
+  BACKEND_MAIL,
 } = require("../config");
 const nodemailer = require("nodemailer");
 const { oauth2Client } = require("../controllers/OAuth");
@@ -16,7 +16,7 @@ const createNodeMailerTransporter = async () => {
     auth: {
       type: "OAuth2",
       // TODO esto hardcoded tengo que cambiarlo por en ENV
-      user: USER_MAIL,
+      user: BACKEND_MAIL,
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
