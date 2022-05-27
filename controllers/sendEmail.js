@@ -18,7 +18,7 @@ const sendPeerToPeerMail = async (req, res) => {
     message,
   } = req.body;
   // TODO controlar que hacer con la form esta si esta vacia
-
+  // TODO remove all console.log
   console.log("recipientEmail:", recipientEmail);
 
   const htmlContent = createHTML(recipientName, emitterName, message);
@@ -37,22 +37,10 @@ const sendPeerToPeerMail = async (req, res) => {
 
   try {
     const transporter = await createNodeMailerTransporter();
-    const result = await transporter.sendMail(mailOptions); // darle ponele callback otry catch!
-    // transport.sendMail(mailOptions,function(err,result){
-    //   if(err){
-    //   res.send({
-    //   message:err
-    //   })
-    //   }else{
-    //   transport.close();
-    //   res.send({
-    //   message:'Email has been sent: check your inbox!'
-    //   })
-    //   }
-    console.log(result);
-    res.status(200).send("sent");
+    const result = await transporter.sendMail(mailOptions);
+    res.status(200).json({ "status:": "sent", info: result });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ "status:": "error", info: err });
   }
 };
 
@@ -90,22 +78,10 @@ const sendWelcomeMail = async (req, res) => {
 
   try {
     const transporter = await createNodeMailerTransporter();
-    const result = await transporter.sendMail(mailOptions); // darle ponele callback otry catch!
-    // transport.sendMail(mailOptions,function(err,result){
-    //   if(err){
-    //   res.send({
-    //   message:err
-    //   })
-    //   }else{
-    //   transport.close();
-    //   res.send({
-    //   message:'Email has been sent: check your inbox!'
-    //   })
-    //   }
-    console.log(result);
-    res.status(200).send("sent");
+    const result = await transporter.sendMail(mailOptions);
+    res.status(200).json({ "status:": "sent", info: result });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ "status:": "error", info: err });
   }
 };
 
