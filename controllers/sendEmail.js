@@ -4,9 +4,10 @@ const {
 } = require("../controllers/nodeMailerTransporter");
 const { welcomeHTML } = require("../controllers/welcomeHTML");
 const path = require("path");
-
-// TODO less secure app va a dejar de funcionar pronto!
-// TODO darle publish app en la consola de google. Poner un logo
+const {
+  simpleMailSchema,
+  welComeSchema,
+} = require("../controllers/joiSchemas");
 
 const sendPeerToPeerMail = async (req, res) => {
   const {
@@ -17,15 +18,18 @@ const sendPeerToPeerMail = async (req, res) => {
     subject,
     message,
   } = req.body;
-  // TODO controlar que hacer con la form esta si esta vacia
-  // TODO remove all console.log
-  console.log("recipientEmail:", recipientEmail);
+
+  try {
+    await simpleMailSchema.validateAsync(req.body);
+  } catch (err) {
+    const errMsg = err.details[0].message;
+    return res.status(400).json({ "status:": "error", message: errMsg });
+  }
 
   const htmlContent = createHTML(recipientName, emitterName, message);
 
   const mailOptions = {
-    // TODO esto hardcoded tengo que cambiarlo por opciones!!
-    // As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
+    // As per nodemailer documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
     from: {
       name: emitterName,
       address: emitterEmail,
@@ -46,15 +50,18 @@ const sendPeerToPeerMail = async (req, res) => {
 
 const sendWelcomeMail = async (req, res) => {
   const { email, name } = req.body;
-  // TODO controlar que hacer con la form esta si esta vacia
-  // TODO aca crear el HTML con las cosas del body
+
+  try {
+    await welComeSchema.validateAsync(req.body);
+  } catch (err) {
+    const errMsg = err.details[0].message;
+    return res.status(400).json({ "status:": "error", message: errMsg });
+  }
+
   const imagePath = path.join(__dirname, "/../public/email-banner.png");
   const signaturePath = path.join(__dirname, "/../public/signature.png");
 
-  console.log("image_path:", imagePath);
   const mailOptions = {
-    // TODO esto hardcoded tengo que cambiarlo por opciones!!
-    // TODO testear los errores, por ejemplo el de cuando expira el token
     // As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
     from: {
       name: "Nuwe E-mail App",
