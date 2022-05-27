@@ -12,6 +12,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // TODO poner esto con dotenv
 // TODO poner App logo en google dashboardh oauth2
 // TODO probar que pasa si sacas less secure apps!!!
-app.listen(process.env.PORT || 3000, () => {
+// TODO eliminar el front?
+// TODO HACer tests?
+// TODO crear template de env
+app.listen(process.env.PORT || 3030, () => {
   console.log("Server started on port 3030"); // TODO poner el port bien aca
 });
