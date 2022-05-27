@@ -1,4 +1,4 @@
-const createHTML = require("../controllers/createHTML");
+const createBodyHTML = require("./createBodyHTML");
 const {
   createNodeMailerTransporter,
 } = require("../controllers/nodeMailerTransporter");
@@ -26,7 +26,7 @@ const sendPeerToPeerMail = async (req, res) => {
     return res.status(400).json({ "status:": "error", message: errMsg });
   }
 
-  const htmlContent = createHTML(recipientName, emitterName, message);
+  const htmlContent = createBodyHTML(recipientName, emitterName, message);
 
   const mailOptions = {
     // As per nodemailer documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
