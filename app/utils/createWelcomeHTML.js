@@ -1,4 +1,4 @@
-const welcomeHTML = (name) => {
+const createWelcomeHTML = (name) => {
   return `
 
   <body>
@@ -16,4 +16,4 @@ const welcomeHTML = (name) => {
 
 `;
 };
-module.exports = { welcomeHTML };
+module.exports = { welcomeHTML: createWelcomeHTML };

@@ -1,4 +1,13 @@
-const createHTML = (recipientName, emitterName, message) => {
+/**
+ *
+ *
+ * @param {*} recipientName
+ * @param {*} emitterName
+ * @param {*} message
+ * @returns
+ */
+
+const createBodyHTML = (recipientName, emitterName, message) => {
   const htmlContent = `
 <p>Hi ${recipientName}, ${emitterName} has sent you this message:</p>
 <p>${message}</p>
@@ -6,4 +15,4 @@ const createHTML = (recipientName, emitterName, message) => {
   return htmlContent;
 };
 
-module.exports = createHTML;
+module.exports = createBodyHTML;

@@ -2,7 +2,7 @@ const createBodyHTML = require("../utils/createBodyHTML");
 const {
   createNodeMailerTransporter,
 } = require("../utils/nodeMailerTransporter");
-const { welcomeHTML } = require("../utils/welcomeHTML");
+const { createWelcomeHTML } = require("../utils/createWelcomeHTML");
 const path = require("path");
 const { simpleMailSchema, welComeSchema } = require("../utils/joiSchemas");
 
@@ -65,7 +65,7 @@ const sendWelcomeMail = async (req, res) => {
     },
     to: email,
     subject: "Welcome to MyApp!",
-    html: welcomeHTML(name),
+    html: createWelcomeHTML(name),
     attachments: [
       {
         filename: "header.png",
