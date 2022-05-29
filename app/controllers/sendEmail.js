@@ -6,6 +6,10 @@ const { createWelcomeHTML } = require("../utils/createWelcomeHTML");
 const path = require("path");
 const { simpleMailSchema, welComeSchema } = require("../utils/joiSchemas");
 
+/**
+ * An user will make use of this endpoint to send an email
+ */
+
 const sendPeerToPeerMail = async (req, res) => {
   const {
     emitterName,
@@ -20,7 +24,9 @@ const sendPeerToPeerMail = async (req, res) => {
     await simpleMailSchema.validateAsync(req.body);
   } catch (err) {
     const errMsg = err.details[0].message;
-    return res.status(400).json({ "status:": "error", message: errMsg });
+    return res
+      .status(400)
+      .json({ "status:": "Validation error", message: errMsg });
   }
 
   const htmlContent = createBodyHTML(recipientName, emitterName, message);
@@ -45,6 +51,9 @@ const sendPeerToPeerMail = async (req, res) => {
   }
 };
 
+/**
+ * This endpoint will send an welcome email when the user registers
+ */
 const sendWelcomeMail = async (req, res) => {
   const { email, name } = req.body;
 

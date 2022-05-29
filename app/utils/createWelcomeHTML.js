@@ -1,3 +1,9 @@
+/**
+ * Will return a string with the HTML code for the welcome email body.
+ * @param {string} name - The name of the user that has registered
+ * @returns {string} - The HTML code for the welcome email body
+ */
+
 const createWelcomeHTML = (name) => {
   return `
 

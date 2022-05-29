@@ -7,6 +7,11 @@ const {
 const nodemailer = require("nodemailer");
 const { oauth2Client } = require("./OAuth");
 
+/**
+ * Will request a new access token from the google API and create and return a new transporter object
+ * @returns {Promise<Object>}  - Resolves to a transporter object, rejects with an error
+ */
+
 const createNodeMailerTransporter = async () => {
   oauth2Client.setCredentials({
     refresh_token: REFRESH_TOKEN,

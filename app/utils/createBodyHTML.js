@@ -1,10 +1,10 @@
 /**
+ * Will return a string with the HTML code for the email body
  *
- *
- * @param {*} recipientName
- * @param {*} emitterName
- * @param {*} message
- * @returns
+ * @param {string} recipientName - The name of the recipient.
+ * @param {string} emitterName - The name of the emitter
+ * @param {string} message - The message to be sent to the recipient
+ * @returns {string} - The HTML code for the email body
  */
 
 const createBodyHTML = (recipientName, emitterName, message) => {
