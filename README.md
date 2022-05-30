@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-
+[![CodeFactor](https://www.codefactor.io/repository/github/mariano-farace/nuwe-mailer/badge)](https://www.codefactor.io/repository/github/mariano-farace/nuwe-mailer)
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -10,7 +10,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/mariano-farace/)
 
 
 <!-- PROJECT LOGO -->
@@ -210,8 +209,11 @@ Content-Length: xy
 
 <!-- CONTACT -->
 # Contact
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/mariano-farace/) 
 
-Mariano Farace - mariano_farace@hotmail.com
+
+
+e-mail: mariano_farace@hotmail.com
 
 Project Link: [https://github.com/mariano-farace/nuwe-mailer](https://github.com/mariano-farace/nuwe-mailer)
 
@@ -224,3 +226,4 @@ Project Link: [https://github.com/mariano-farace/nuwe-mailer](https://github.com
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
+
