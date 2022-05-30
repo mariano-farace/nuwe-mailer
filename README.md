@@ -116,41 +116,72 @@ The app has independent client and server
 
 
 # API Documentation
-This API uses `POST` request to communicate and HTTP response codes(https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indenticate status and errors. All responses come in standard JSON. All requests must include a `content-type` of `application/json` and the body must be valid JSON.
+This API uses `POST` request to communicate and HTTP [response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indenticate status and errors. All responses come in standard JSON. All requests must include a `content-type` of `application/json` and the body must be valid JSON.
 
-## Response Codes 
-### Response Codes
-```
-200: Success
-400: Bad request
-401: Unauthorized
-404: Cannot be found
-405: Method not allowed
-422: Unprocessable Entity 
-50X: Server Error
-```
-### Error Codes Details
-```
-100: Bad Request
-110: Unauthorized
-120: User Authenticaion Invalid
-130: Parameter Error
-140: Item Missing
-150: Conflict
-160: Server Error
-```
-### Example Error Message
+## Send Welcome Email
+Will send a Welcome email to the user, using a template.
+
+**You send:**  User name and email.
+
+**You get:** A response with information about the email sent.
+
+**Request:**
 ```json
-http code 402
+POST /register HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Content-Length: xy
+
 {
-    "code": 120,
-    "message": "invalid crendetials",
-    "resolve": "The username or password is not correct."
+    "email":"johndoe@someemail.com",
+    "name":"John Doe"
 }
 ```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: xy
+
+{
+    "status:": "sent",
+    "info": {
+        "accepted": [
+            "johndoe@gmail.com"
+        ],
+        "rejected": [],
+        "envelopeTime": 612,
+        "messageTime": 1433,
+        "messageSize": 195260,
+        "response": "250 2.0.0 OK  1653888993 p42-20020a05600c1daa00b0039aef592ca0sm4443630wms.35 - gsmtp",
+        "envelope": {
+            "from": "",
+            "to": [
+                "johndoe@gmail.com"
+            ]
+        },
+        "messageId": "<e4cedb38-c8ee-99cb-3ad8-1d3fb5e7294b@atom-Legion-5-15ACH6H>"
+    }
+}
+```
+**Failed Response:**
+```json
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Content-Length: xy
+
+{
+    "status:": "Validation error",
+    "message": "\"emitterName\" is required"
+}
+``` 
+
 
 ## Send Peer to Peer Email
+Will send an email from the Emitter to the recipient, making use of the mailing service provided by the API.
+
 **You send:**  Emitter and Recipient name and email. Subject and message
+
 **You get:** A response with information about the email sent.
 
 **Request:**
@@ -161,10 +192,10 @@ Content-Type: application/json
 Content-Length: xy
 
 {
-    "emitterName":"Pepe",
-    "emitterEmail":"pepe@gmail.com",
-    "recipientName":"Mariano Farace",
-    "recipientEmail":"mariano_farace@hotmail.com",
+    "emitterName":"John Doe",
+    "emitterEmail":"johndoe@email.com",
+    "recipientName":"Jane Smith",
+    "recipientEmail":"janesmith@email.com",
     "subject":"Este es un mail de prueba",
     "message":"Lorem Ipsum is simply dummy text of the printing"
 }
@@ -179,7 +210,7 @@ Content-Length: xy
     "status:": "sent",
     "info": {
         "accepted": [
-            "mariano_farace@hotmail.com"
+            "janesmith@mail.com"
         ],
         "rejected": [],
         "envelopeTime": 811,
@@ -187,9 +218,9 @@ Content-Length: xy
         "messageSize": 975,
         "response": "250 2.0.0 OK  1653887868 c1-20020adfe701000000b00210288c55d0sm5052347wrm.52 - gsmtp",
         "envelope": {
-            "from": "pepe@gmail.com",
+            "from": "johndoe@email.com",
             "to": [
-                "mariano_farace@hotmail.com"
+                "janesmith@email.com"
             ]
         },
         "messageId": "<fbfae462-b3c4-b844-7c26-80c58ce23c5c@gmail.com>"
