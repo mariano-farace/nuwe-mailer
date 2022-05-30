@@ -64,8 +64,8 @@ const sendWelcomeMail = async (req, res) => {
     return res.status(400).json({ "status:": "error", message: errMsg });
   }
 
-  const imagePath = path.join(__dirname, "/../public/email-banner.png");
-  const signaturePath = path.join(__dirname, "/../public/signature.png");
+  const imagePath = path.join(__dirname, "/../assets/email-banner.png");
+  const signaturePath = path.join(__dirname, "/../assets/signature.png");
 
   const mailOptions = {
     // As per documentation: Gmail also always sets authenticated username as the From: email address. So if you authenticate as foo@example.com and set bar@example.com as the from: address, then Gmail reverts this and replaces the sender with the authenticated user.
