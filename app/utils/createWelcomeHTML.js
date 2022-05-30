@@ -22,4 +22,4 @@ const createWelcomeHTML = (name) => {
 
 `;
 };
-module.exports = { welcomeHTML: createWelcomeHTML };
+module.exports = { createWelcomeHTML };
