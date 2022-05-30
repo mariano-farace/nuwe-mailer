@@ -7,14 +7,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/", mailRouter);
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "app/public")));
 
 // TODO probar que pasa si sacas less secure apps!!!
 // TODO eliminar el front?
-// TODO HACer tests?
-// TODO Fijate que los templates que estas usando de los mails sean una cosa handwriten o algo de nodemailer
+// TODO PONER ESO DE CALIDAD DEL CODIGO
 // TODO darle publish app en la consola de google. Poner un logo
-// TODO testear los errores, por ejemplo el de cuando expira el token
 // TODO borrar todos los TODO
 
 app.listen(process.env.PORT || 3030, () => {

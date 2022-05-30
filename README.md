@@ -146,7 +146,7 @@ Content-Length: xy
 
 
 ## Send Peer to Peer Email
-Will send an email from the Emitter to the recipient, making use of the mailing service provided by the API.
+Will send an email from the Emitter to the recipient, making use of the mailing service provided by the API. Alternatively, you can use a form served at http://localhost:3030/main.html 
 
 **You send:**  Emitter and Recipient name and email. Subject and message
 
